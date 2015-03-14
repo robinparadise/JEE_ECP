@@ -7,12 +7,21 @@ import javax.persistence.Id;
 @Entity
 public class Tema {
 	
+	public static final String TABLE = "tema";
+	public static final String ID = "id";
+	public static final String NAME = "name";
+	public static final String QUESTION = "question";
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
 
 	private String name;
 	private String question;
+
+	public Tema(String name) {
+		this.name = name;
+	}
 
     public Tema(){	
     }
