@@ -41,5 +41,6 @@ public class HelloJPA {
         em.getTransaction().commit();
         // Read
         System.out.println(em.find(Voto.class, 1));
+        
     }
 }
