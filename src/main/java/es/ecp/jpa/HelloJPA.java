@@ -9,6 +9,8 @@ import javax.persistence.Persistence;
 import org.eclipse.persistence.config.PersistenceUnitProperties;
 
 import es.ecp.models.entities.Tema;
+import es.ecp.models.entities.Voto;
+import es.ecp.models.utils.NivelEstudios;
 
 public class HelloJPA {
     public static void main(String[] args) {
@@ -31,5 +33,13 @@ public class HelloJPA {
         em.getTransaction().commit();
         // Read
         System.out.println(em.find(Tema.class, 1));
+        
+        Voto v1 = new Voto("127.0.0.1", NivelEstudios.FP, 9, t1);
+        // Create
+        em.getTransaction().begin();
+        em.persist(v1);
+        em.getTransaction().commit();
+        // Read
+        System.out.println(em.find(Voto.class, 1));
     }
 }
