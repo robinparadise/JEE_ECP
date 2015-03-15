@@ -1,6 +1,6 @@
 package models.daos.jpa;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -37,8 +37,15 @@ public class VotoDaoJpaTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testCreate() {
+		Tema tema1 = new Tema("test2", "test2");
+		temaDao.create(tema1);
+		Voto voto1 = new Voto("127.0.0.1", NivelEstudios.FP, 9, tema1);
+		votoDao.create(voto1);
+		Voto voto2 = votoDao.read(voto1.getId());
+		assertEquals(voto1, voto2);
+		votoDao.deleteById(voto1.getId());
+		temaDao.deleteById(tema1.getId());
 	}
 
 }
