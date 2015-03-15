@@ -24,6 +24,5 @@ public class HelloJDBC {
 		} catch (SQLException e) {
 			System.out.println("Imposible conectar: " + e.getMessage());
 		}
-
 	}
 }
