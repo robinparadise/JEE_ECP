@@ -2,6 +2,7 @@ package es.ecp.models.daos.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -75,8 +76,16 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 
 	@Override
 	public List<Voto> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Voto> list = new ArrayList<Voto>();
+		ResultSet resultSet = this.query(String.format(SQL_SELECT_ALL,
+				Voto.TABLE));
+
+		Voto voto = this.create(resultSet);
+		while (voto != null) {
+			list.add(voto);
+			voto = this.create(resultSet);
+		}
+		return list;
 	}
 
 	@Override
