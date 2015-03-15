@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 
 import es.ecp.models.daos.DaoFactory;
 import es.ecp.models.daos.TemaDao;
+import es.ecp.models.daos.VotoDao;
 
 public class DaoJpaFactory extends DaoFactory {
 	private static final String PERSISTENCE_UNIT = "JEE_ECP";
@@ -26,6 +27,11 @@ public class DaoJpaFactory extends DaoFactory {
 	@Override
 	public TemaDao getTemaDao() {
 		return new TemaDaoJpa();
+	}
+	
+	@Override
+	public VotoDao getVotoDao() {
+		return new VotoDaoJpa();
 	}
 	
 }
