@@ -68,6 +68,14 @@ public class VotoDaoJpaTest {
 		votoDao.deleteById(this.voto.getId());
 		assertNull(votoDao.read(this.voto.getId()));
 	}
+	
+	@Test
+	public void testFindAll(){
+		Voto v = new Voto("127.0.0.1", NivelEstudios.PRESCOLAR, 7, tema);
+		votoDao.create(v);
+		assertEquals(2, votoDao.findAll().size());
+		votoDao.deleteById(v.getId());
+	}
 
 	@After
 	public void after() {
