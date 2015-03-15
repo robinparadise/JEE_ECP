@@ -1,7 +1,6 @@
 package models.daos.jpa;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -36,6 +35,11 @@ public class TemaDaoJpaTest {
 		Tema tema1 = temaDao.read(tema.getId());
 		assertEquals(tema.getId(), tema1.getId());
 		temaDao.deleteById(tema.getId());
+	}
+	
+	@Test
+	public void testRead() {
+		assertEquals(this.tema.getId(), temaDao.read(this.tema.getId()).getId());
 	}
 	
 	@After
