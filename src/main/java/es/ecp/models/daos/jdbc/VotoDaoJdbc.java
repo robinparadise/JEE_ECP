@@ -8,15 +8,20 @@ import es.ecp.models.entities.Voto;
 public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 		VotoDao {
 
+	private static final String INSERT_QUERY = "INSERT INTO %s (%d,%s,%s) VALUES ('%s','%s','%s')";
+
 	public static String sqlToCreateTable() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void create(Voto entity) {
-		// TODO Auto-generated method stub
+	public void create(Voto voto) {
+		this.updateSql(String.format(INSERT_QUERY, Voto.TABLE, Voto.IP,
+				Voto.VALORACION, Voto.NIVEL_ESTUDIO, voto.getUserIp(),
+				voto.getValoracion(), voto.getNivelEstudios()));
 
+		voto.setId(this.autoId());
 	}
 
 	@Override
@@ -54,6 +59,5 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }
