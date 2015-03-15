@@ -16,6 +16,7 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL AUTO_INCREMENT, %s VARCHAR(255) NOT NULL, "
 			+ "%s VARCHAR(255) NOT NULL, PRIMARY KEY (%s))";
 	private static final String SQL_INSERT = "INSERT INTO %s (%s,%s) VALUES ('%s','%s')";
+	private static final String SQL_UPDATE = "UPDATE %s SET %s='%s', %s='%s' WHERE ID=%d";
 	
 	private Logger log = LogManager.getLogger(TemaDaoJdbc.class);
 
@@ -49,6 +50,12 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 				Tema.TABLE, id));
 		return this.create(resultSet);
 	}
+	
+	@Override
+	public void update(Tema tema) {
+		this.updateSql(String.format(SQL_UPDATE, Tema.TABLE, Tema.NAME,
+				tema.getName(), Tema.QUESTION, tema.getQuestion(), tema.getId()));
+	}
 
 	@Override
 	public void deleteById(Integer id) {
@@ -60,12 +67,6 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 	public List<Tema> findAll() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void update(Tema entity) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
