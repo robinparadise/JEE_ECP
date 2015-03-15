@@ -59,5 +59,13 @@ public class Tema {
 	public String toString() {
 		return "Tema [id=" + id + ", name=" + name + ":" + question + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		assert obj != null;
+		Tema tema2 = (Tema) obj;
+		return this.id.equals(tema2.id) && this.name.equals(tema2.name)
+				&& this.question.equals(tema2.question);
+	}
 
 }
