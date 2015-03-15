@@ -2,6 +2,7 @@ package models.daos.jpa;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,6 +47,12 @@ public class VotoDaoJpaTest {
 		assertEquals(voto1, voto2);
 		votoDao.deleteById(voto1.getId());
 		temaDao.deleteById(tema1.getId());
+	}
+	
+	@After
+	public void after(){
+		votoDao.deleteById(this.voto.getId());
+		temaDao.deleteById(this.voto.getTema().getId());
 	}
 
 }
