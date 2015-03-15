@@ -8,4 +8,6 @@ public interface VotoDao extends GenericDao<Voto, Integer> {
 
 	List<Voto> findByTemaId(Integer tema_id);
 
+	List<Voto> findByNivelEstudios(Integer nivel);
+
 }

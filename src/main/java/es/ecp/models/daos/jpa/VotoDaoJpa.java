@@ -30,4 +30,15 @@ public class VotoDaoJpa extends GenericDaoJpa<Voto, Integer> implements VotoDao 
 		return votacionQuery.getResultList();
 	}
 
+	@Override
+	public List<Voto> findByNivelEstudios(Integer nivel) {
+		CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Voto> query = criteria.createQuery(Voto.class);
+		Root<Voto> rootVoto = query.from(Voto.class);
+		query.where(criteria.equal(
+				rootVoto.get("nivel_estudios").as(Integer.class), nivel));
+		TypedQuery<Voto> votacionQuery = entityManager.createQuery(query);
+		return votacionQuery.getResultList();
+	}
+
 }
