@@ -42,6 +42,16 @@ public class TemaDaoJpaTest {
 		assertEquals(this.tema.getId(), temaDao.read(this.tema.getId()).getId());
 	}
 	
+	@Test
+	public void testUpdate(){
+		this.tema.setName("name_updated");
+		this.tema.setQuestion("question_updated");
+		temaDao.update(this.tema);
+		assertEquals(this.tema.getId(), temaDao.read(this.tema.getId()).getId());
+		assertEquals(this.tema.getName(), temaDao.read(this.tema.getId()).getName());
+		assertEquals(this.tema.getQuestion(), temaDao.read(this.tema.getId()).getQuestion());
+	}
+	
 	@After
     public void after() {
         temaDao.deleteById(this.tema.getId());
