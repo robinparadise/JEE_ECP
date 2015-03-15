@@ -56,6 +56,14 @@ public class TemaDaoJpaTest {
 		assertEquals(temaDao.read(this.tema.getId()), null);
 	}
 
+	@Test
+	public void testFindAll() {
+		Tema tema2 = new Tema("name2", "question2");
+		temaDao.create(tema2);
+		assertEquals(2, temaDao.findAll().size());
+		temaDao.deleteById(tema2.getId());
+	}
+
 	@After
 	public void after() {
 		temaDao.deleteById(this.tema.getId());
