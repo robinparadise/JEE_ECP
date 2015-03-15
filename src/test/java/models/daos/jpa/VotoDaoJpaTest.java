@@ -1,6 +1,7 @@
 package models.daos.jpa;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.After;
 import org.junit.Before;
@@ -48,14 +49,22 @@ public class VotoDaoJpaTest {
 		votoDao.deleteById(voto1.getId());
 		temaDao.deleteById(tema1.getId());
 	}
-	
+
 	@Test
-	public void testRead(){
+	public void testRead() {
 		assertEquals(this.voto, votoDao.read(this.voto.getId()));
 	}
-	
+
+	@Test
+	public void testUpdate() {
+		this.voto.setNivelEstudios(NivelEstudios.MASTER);
+		this.voto.setValoracion(8);
+		votoDao.update(this.voto);
+		assertEquals(this.voto, votoDao.read(this.voto.getId()));
+	}
+
 	@After
-	public void after(){
+	public void after() {
 		votoDao.deleteById(this.voto.getId());
 		temaDao.deleteById(this.voto.getTema().getId());
 	}
