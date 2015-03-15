@@ -60,23 +60,23 @@ public class Voto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getUserIp() {
 		return this.user_ip;
 	}
-	
+
 	public void setUserIp(String ip) {
 		this.user_ip = ip;
 	}
-	
+
 	public NivelEstudios getNivelEstudios() {
 		return this.nivel_estudios;
 	}
-	
+
 	public void setNivelEstudios(NivelEstudios n) {
 		this.nivel_estudios = n;
 	}
-	
+
 	public Integer getValoracion() {
 		return this.valoracion;
 	}
@@ -84,7 +84,7 @@ public class Voto {
 	public void setValoracion(Integer val) {
 		this.valoracion = val;
 	}
-	
+
 	public Tema getTema() {
 		return this.tema;
 	}
@@ -96,5 +96,15 @@ public class Voto {
 	@Override
 	public String toString() {
 		return "Voto[" + id + ":" + valoracion + "]";
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		assert obj != null;
+		Voto other = (Voto) obj;
+		return this.nivel_estudios.equals(other.nivel_estudios)
+				&& this.id.equals(other.id) && this.user_ip.equals(other.user_ip)
+				&& this.valoracion.equals(other.valoracion)
+				&& this.tema.equals(other.tema);
 	}
 }
