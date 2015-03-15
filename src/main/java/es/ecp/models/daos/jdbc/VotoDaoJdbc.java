@@ -19,6 +19,8 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 	
 	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s INT, %s VARCHAR(255), %s VARCHAR(255), PRIMARY KEY (%s))";
 	
+	private static final String QUERY_UPDATE = "UPDATE %s SET %d='%d', %s='%s', %s='%s' WHERE ID=%d";
+	
 	private Logger log = LogManager.getLogger(VotoDaoJdbc.class);
 
 	public static String sqlToCreateTable() {
@@ -60,9 +62,10 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 	}
 
 	@Override
-	public void update(Voto entity) {
-		// TODO Auto-generated method stub
-
+	public void update(Voto voto) {
+		this.updateSql(String.format(QUERY_UPDATE, Voto.TABLE, Voto.ID,
+				Voto.VALORACION, Voto.IP, Voto.NIVEL_ESTUDIO, voto.getId(),
+				voto.getValoracion(), voto.getUserIp(), voto.getNivelEstudios()));
 	}
 
 	@Override
