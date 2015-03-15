@@ -42,5 +42,6 @@ public class HelloJPA {
         // Read
         System.out.println(em.find(Voto.class, 1));
         
+        
     }
 }
