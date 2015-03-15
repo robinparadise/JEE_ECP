@@ -33,13 +33,13 @@ public class TemaDaoJpaTest {
 		Tema tema = new Tema("name_t1", "q_t1");
 		temaDao.create(tema);
 		Tema tema1 = temaDao.read(tema.getId());
-		assertEquals(tema.getId(), tema1.getId());
+		assertEquals(tema, tema1);
 		temaDao.deleteById(tema.getId());
 	}
 	
 	@Test
 	public void testRead() {
-		assertEquals(this.tema.getId(), temaDao.read(this.tema.getId()).getId());
+		assertEquals(this.tema, temaDao.read(this.tema.getId()));
 	}
 	
 	@Test
@@ -47,9 +47,7 @@ public class TemaDaoJpaTest {
 		this.tema.setName("name_updated");
 		this.tema.setQuestion("question_updated");
 		temaDao.update(this.tema);
-		assertEquals(this.tema.getId(), temaDao.read(this.tema.getId()).getId());
-		assertEquals(this.tema.getName(), temaDao.read(this.tema.getId()).getName());
-		assertEquals(this.tema.getQuestion(), temaDao.read(this.tema.getId()).getQuestion());
+		assertEquals(this.tema, temaDao.read(this.tema.getId()));
 	}
 	
 	@After
