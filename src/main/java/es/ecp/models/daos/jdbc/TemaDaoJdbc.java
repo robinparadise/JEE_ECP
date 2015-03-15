@@ -56,11 +56,10 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 		this.updateSql(String.format(SQL_UPDATE, Tema.TABLE, Tema.NAME,
 				tema.getName(), Tema.QUESTION, tema.getQuestion(), tema.getId()));
 	}
-
+	
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-
+		this.updateSql(String.format(SQL_DELETE_ID, Tema.TABLE, id));
 	}
 
 	@Override
