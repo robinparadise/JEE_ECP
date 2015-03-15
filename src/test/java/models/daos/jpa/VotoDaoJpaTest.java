@@ -63,6 +63,12 @@ public class VotoDaoJpaTest {
 		assertEquals(this.voto, votoDao.read(this.voto.getId()));
 	}
 
+	@Test
+	public void testDelete() {
+		votoDao.deleteById(this.voto.getId());
+		assertNull(votoDao.read(this.voto.getId()));
+	}
+
 	@After
 	public void after() {
 		votoDao.deleteById(this.voto.getId());
