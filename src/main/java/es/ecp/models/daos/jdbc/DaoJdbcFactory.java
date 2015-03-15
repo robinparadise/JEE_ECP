@@ -57,8 +57,7 @@ public class DaoJdbcFactory extends DaoFactory {
 
 	@Override
 	public TemaDao getTemaDao() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TemaDaoJdbc();
 	}
 
 	@Override
