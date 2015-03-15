@@ -2,6 +2,7 @@ package es.ecp.models.daos.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,14 +18,14 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 			+ "%s VARCHAR(255) NOT NULL, PRIMARY KEY (%s))";
 	private static final String SQL_INSERT = "INSERT INTO %s (%s,%s) VALUES ('%s','%s')";
 	private static final String SQL_UPDATE = "UPDATE %s SET %s='%s', %s='%s' WHERE ID=%d";
-	
+
 	private Logger log = LogManager.getLogger(TemaDaoJdbc.class);
 
 	public static String sqlToCreateTable() {
 		return String.format(SQL_CREATE_TABLE, Tema.TABLE, Tema.ID, Tema.NAME,
 				Tema.QUESTION, Tema.ID);
 	}
-	
+
 	private Tema create(ResultSet resultSet) {
 		try {
 			if (resultSet != null && resultSet.next()) {
@@ -36,27 +37,27 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void create(Tema tema) {
 		this.updateSql(String.format(SQL_INSERT, Tema.TABLE, Tema.NAME,
 				Tema.QUESTION, tema.getName(), tema.getQuestion()));
 		tema.setId(this.autoId());
 	}
-	
+
 	@Override
 	public Tema read(Integer id) {
 		ResultSet resultSet = this.query(String.format(SQL_SELECT_ID,
 				Tema.TABLE, id));
 		return this.create(resultSet);
 	}
-	
+
 	@Override
 	public void update(Tema tema) {
 		this.updateSql(String.format(SQL_UPDATE, Tema.TABLE, Tema.NAME,
 				tema.getName(), Tema.QUESTION, tema.getQuestion(), tema.getId()));
 	}
-	
+
 	@Override
 	public void deleteById(Integer id) {
 		this.updateSql(String.format(SQL_DELETE_ID, Tema.TABLE, id));
@@ -64,8 +65,15 @@ public class TemaDaoJdbc extends GenericDaoJdbc<Tema, Integer> implements
 
 	@Override
 	public List<Tema> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Tema> list = new ArrayList<Tema>();
+		ResultSet resultSet = this.query(String.format(SQL_SELECT_ALL,
+				Tema.TABLE));
+		Tema tema = this.create(resultSet);
+		while (tema != null) {
+			list.add(tema);
+			tema = this.create(resultSet);
+		}
+		return list;
 	}
 
 }
