@@ -17,18 +17,20 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 		VotoDao {
 
 	private static final String INSERT_QUERY = "INSERT INTO %s (%d,%s,%s) VALUES ('%s','%s','%s')";
-	
+
 	private static final String SQL_CREATE_TABLE = "CREATE TABLE %s (%s INT NOT NULL, %s INT, %s VARCHAR(255), %s VARCHAR(255), PRIMARY KEY (%s))";
-	
+
 	private static final String QUERY_UPDATE = "UPDATE %s SET %d='%d', %s='%s', %s='%s' WHERE ID=%d";
-	
+
+	private static final String SQL_FIND_BY_TEMA_ID = "SELECT * FROM %s WHERE TEMA=%d";
+
 	private Logger log = LogManager.getLogger(VotoDaoJdbc.class);
 
 	public static String sqlToCreateTable() {
 		return String.format(SQL_CREATE_TABLE, Voto.TABLE, Voto.ID, Voto.IP,
 				Voto.NIVEL_ESTUDIO, Voto.VALORACION, Voto.ID);
 	}
-	
+
 	private Voto create(ResultSet resultSet) {
 		Voto result = null;
 		try {
@@ -90,8 +92,15 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 
 	@Override
 	public List<Voto> findByTemaId(Integer tema_id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Voto> list = new ArrayList<Voto>();
+		ResultSet resultSet = this.query(String.format(SQL_FIND_BY_TEMA_ID,
+				Voto.TABLE, tema_id));
+		Voto voto = this.create(resultSet);
+		while (voto != null) {
+			list.add(voto);
+			voto = this.create(resultSet);
+		}
+		return list;
 	}
 
 	@Override
