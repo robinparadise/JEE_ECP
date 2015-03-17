@@ -22,28 +22,23 @@ public class Dispatcher extends HttpServlet {
 
 		String view = "index";
 
-		LogManager.getLogger().debug("[view]: " + view);
 
 		if (request.getPathInfo() != null) {
 			String action = request.getPathInfo().substring(1);
 
-			LogManager.getLogger().debug("[action]: " + action);
 
 			request.setCharacterEncoding("UTF-8");
 			switch (action) {
 			case "temas":
-				LogManager.getLogger().debug("@[:Temas]");
-				TemaBean temaBean = new TemaBean();
-				temaBean.update();
-				request.setAttribute(action, temaBean);
+				ListTemasBean listTemasBean = new ListTemasBean();
+				listTemasBean.update();
+				request.setAttribute(action, listTemasBean);
 				view = action;
 				break;
 			case "newtema":
-				LogManager.getLogger().debug("@[:NEW]");
 				view = action;
 				break;
 			default:
-				LogManager.getLogger().debug("View NOT FOUND: " + view);
 				break;
 			}
 		}
