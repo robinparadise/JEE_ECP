@@ -1,12 +1,9 @@
 package es.ecp.views.beans;
 
-import javax.faces.bean.ManagedProperty;
-
 import es.ecp.controllers.ControllerFactory;
 
 public abstract class ViewBean {
 
-	@ManagedProperty(value = "#{controllerFactory}")
 	private ControllerFactory controllerFactory;
 
 	public void setControllerFactory(ControllerFactory controllerFactory) {
@@ -14,6 +11,8 @@ public abstract class ViewBean {
 	}
 
 	protected ControllerFactory getControllerFactory() {
+		if (controllerFactory == null)
+			controllerFactory = new ControllerFactory();
 		return controllerFactory;
 	}
 
