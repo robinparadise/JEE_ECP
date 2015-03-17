@@ -11,6 +11,10 @@ public class TemaBean extends ViewBean implements Serializable {
 
 	TemaController temaController = this.getControllerFactory()
 			.getTemaController();
+	
+	public TemaBean() {
+		super();
+	}
 
 	private List<Tema> temas;
 
