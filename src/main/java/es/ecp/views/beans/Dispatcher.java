@@ -21,6 +21,26 @@ public class Dispatcher extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String view = "index";
+		
+		LogManager.getLogger().debug("[view]: " + view);
+		
+		if (request.getPathInfo() != null) {
+			String action = request.getPathInfo().substring(1);
+			
+			LogManager.getLogger().debug("[action]: " + action);
+
+			request.setCharacterEncoding("UTF-8");
+			switch (action) {
+			case "newtema":
+				LogManager.getLogger().debug("@[:NEW]");
+				view = action;
+				break;
+			default:
+				LogManager.getLogger().debug("View NOT FOUND: " + view);
+				break;
+			}
+		}
+		
 		LogManager.getLogger().debug(PATH_ROOT_VIEW + view + ".jsp");
 		this.getServletContext()
 				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
