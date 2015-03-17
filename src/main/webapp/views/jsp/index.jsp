@@ -9,7 +9,7 @@
 <body>
 	<h1>Home JEE_ECP</h1>
 	<p>
-		<a href="temas/new">+ Nuevo tema</a>
+		<a href="newtema">+ Nuevo tema</a>
 	</p>
     <p>
         <a href="/Web/jsp/">¬¬ Ver votación</a>
