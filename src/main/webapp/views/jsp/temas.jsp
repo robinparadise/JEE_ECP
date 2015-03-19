@@ -12,10 +12,11 @@
 		<h1>Temas</h1>
 		<ul>
 			<c:forEach var="tema" items="${temas.getTemas()}">
-				<li><a href="votar?temaid=${tema.id}">${tema.name} >> ${tema.question}</a></li>
+				<li>${tema.name} >> ${tema.question} (<a href="votar?temaid=${tema.id}">Votar</a>)</li>
 			</c:forEach>
 		</ul>
-		<a href="index">Volver</a>
+		<a href="index">Volver</a> |
+		<a href="newtema"> + Añadir nuevo Tema</a>
 	</body>
 	
 </html>
