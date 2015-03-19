@@ -10,10 +10,9 @@
 	<h1>
 		Añadir un <b>Tema</b>
 	</h1>
-	<form action="new" method="post">
+	<form action="newtema" method="post">
 		<p>
-			Nombre: <input name="name" type="text"
-				value="${temaView.tema.name}" />${temaView.errorMsg}</p>
+			Nombre: <input name="name" type="text" value="${temaView.tema.name}" />${temaView.errorMsg}</p>
 		<p>
 			Pregunta: <input name="question" type="text"
 				value="${temaView.tema.question}" />${temaView.errorMsg}</p>
@@ -22,7 +21,7 @@
 		</p>
 	</form>
 	<p>
-		<a href="/Web/jsp/home">Volver a Home</a>
+		<a href="index">Volver a Home</a>
 	</p>
 </body>
 </html>
