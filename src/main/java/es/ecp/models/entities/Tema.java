@@ -57,7 +57,7 @@ public class Tema {
 	
 	@Override
 	public String toString() {
-		return "Tema [id=" + id + ", name=" + name + ":" + question + "]";
+		return "[" + id + "] " + name + " >> " + question;
 	}
 	
 	@Override
