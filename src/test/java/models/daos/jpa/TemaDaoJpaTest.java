@@ -15,7 +15,7 @@ import es.ecp.models.entities.Tema;
 public class TemaDaoJpaTest {
 
 	private Tema tema;
-	private TemaDao temaDao = DaoJpaFactory.getFactory().getTemaDao();;
+	private TemaDao temaDao = DaoJpaFactory.getFactory().getTemaDao();
 
 	@BeforeClass
 	public static void beforeClass() {
