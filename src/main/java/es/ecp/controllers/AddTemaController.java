@@ -7,6 +7,8 @@ import es.ecp.models.entities.Tema;
 public class AddTemaController {
 	
 	public void add(Tema tema) {
+		TemaDao temaDao = DaoJpaFactory.getFactory().getTemaDao();
+		temaDao.create(tema);
 	}
 
 }
