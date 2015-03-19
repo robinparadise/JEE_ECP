@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 
+import es.ecp.models.utils.NivelEstudios;
+
 @WebServlet("/jsp/*")
 public class Dispatcher extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,6 +38,11 @@ public class Dispatcher extends HttpServlet {
 			case "newtema":
 				view = action;
 				break;
+			case "votar":
+				AddVotoBean addVotoBean = new AddVotoBean();
+				request.setAttribute(action, addVotoBean);
+				view = action;
+				break;
 			default:
 				break;
 			}
@@ -60,7 +67,9 @@ public class Dispatcher extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			switch (action) {
 			case "newtema":
-				AddTemaView addTemaView = new AddTemaView("New nombre", "New pregunta");
+				AddTemaView addTemaView = new AddTemaView(
+						request.getParameter("name"),
+						request.getParameter("question"));
 				addTemaView.update();
 				ListTemasBean listTemasBean = new ListTemasBean();
 				listTemasBean.update();
