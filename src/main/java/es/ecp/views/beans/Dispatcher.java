@@ -22,10 +22,8 @@ public class Dispatcher extends HttpServlet {
 
 		String view = "index";
 
-
 		if (request.getPathInfo() != null) {
 			String action = request.getPathInfo().substring(1);
-
 
 			request.setCharacterEncoding("UTF-8");
 			switch (action) {
@@ -48,6 +46,35 @@ public class Dispatcher extends HttpServlet {
 				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
 				.forward(request, response);
 
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		String view = "index";
+
+		if (request.getPathInfo() != null) {
+			String action = request.getPathInfo().substring(1);
+
+			request.setCharacterEncoding("UTF-8");
+			switch (action) {
+			case "newtema":
+				AddTemaView addTemaView = new AddTemaView("New nombre", "New pregunta");
+				addTemaView.update();
+				ListTemasBean listTemasBean = new ListTemasBean();
+				listTemasBean.update();
+				request.setAttribute("temas", listTemasBean);
+				view = "temas";
+				break;
+			default:
+				break;
+			}
+		}
+
+		this.getServletContext()
+				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
+				.forward(request, response);
 	}
 
 }
