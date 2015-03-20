@@ -10,7 +10,6 @@
 </head>
 <body>
 	<c:set var="votoView" scope="request" value="${votar}"/>
-	
 	<form action="votar" method="post">
 		<p>${votoView.getTema().toString()}</p>
 		
