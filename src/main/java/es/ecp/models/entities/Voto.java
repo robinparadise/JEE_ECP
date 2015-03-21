@@ -76,7 +76,7 @@ public class Voto {
 		this.nivel_estudios = n;
 	}
 
-	public Integer getValoracion() {
+	public int getValoracion() {
 		return this.valoracion;
 	}
 

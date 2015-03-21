@@ -24,7 +24,7 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 
 	private static final String SQL_FIND_BY_TEMA_ID = "SELECT * FROM %s WHERE TEMA=%d";
 
-	private static final String SQL_FIND_BY_NIVEL_ESTUDIO = "SELECT * FROM %s WHERE NIVELESTUDIO=%d";
+	private static final String SQL_FIND_BY_NIVEL_ESTUDIO = "SELECT * FROM %s WHERE TEMA=%d AND NIVELESTUDIO=%d";
 
 	private Logger log = LogManager.getLogger(VotoDaoJdbc.class);
 
@@ -106,10 +106,10 @@ public class VotoDaoJdbc extends GenericDaoJdbc<Voto, Integer> implements
 	}
 
 	@Override
-	public List<Voto> findByNivelEstudios(Integer nivel) {
+	public List<Voto> findByNivelEstudios(Integer tema_id, Integer nivel) {
 		List<Voto> list = new ArrayList<Voto>();
 		ResultSet resultSet = this.query(String.format(
-				SQL_FIND_BY_NIVEL_ESTUDIO, Voto.TABLE, nivel));
+				SQL_FIND_BY_NIVEL_ESTUDIO, Voto.TABLE, tema_id, nivel));
 		Voto voto = this.create(resultSet);
 		while (voto != null) {
 			list.add(voto);
