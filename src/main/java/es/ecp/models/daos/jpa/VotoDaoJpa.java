@@ -13,7 +13,8 @@ import es.ecp.models.entities.Voto;
 
 public class VotoDaoJpa extends GenericDaoJpa<Voto, Integer> implements VotoDao {
 
-	private EntityManager entityManager;
+	private EntityManager entityManager = DaoJpaFactory
+			.getEntityManagerFactory().createEntityManager();
 
 	public VotoDaoJpa() {
 		super(Voto.class);
