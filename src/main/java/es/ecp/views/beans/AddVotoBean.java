@@ -1,34 +1,44 @@
 package es.ecp.views.beans;
 
+import java.io.Serializable;
+
+import es.ecp.controllers.AddVotoController;
 import es.ecp.models.daos.jpa.DaoJpaFactory;
 import es.ecp.models.entities.Tema;
+import es.ecp.models.entities.Voto;
 import es.ecp.models.utils.NivelEstudios;
 
-public class AddVotoBean {
+public class AddVotoBean extends ViewBean implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private AddVotoController addVotoController = this.getControllerFactory().getAddVotoController();
 
 	private Integer id;
 	private String user_ip;
 	private NivelEstudios nivel_estudios;
 	private Integer valoracion;
 	private Tema tema;
-	
-	
+	private Voto voto;
+
 	private static String[] names() {
-	    NivelEstudios[] nivelEstudios = NivelEstudios.values();
-	    String[] names = new String[nivelEstudios.length];
+		NivelEstudios[] nivelEstudios = NivelEstudios.values();
+		String[] names = new String[nivelEstudios.length];
 
-	    for (int i = 0; i < nivelEstudios.length; i++) {
-	        names[i] = nivelEstudios[i].name();
-	    }
+		for (int i = 0; i < nivelEstudios.length; i++) {
+			names[i] = nivelEstudios[i].name();
+		}
 
-	    return names;
+		return names;
 	}
+
 	public String[] niveles_estudios = names();
+
 	public String[] getNivelesEstudios() {
 		System.out.println(">>");
 		System.out.println(this.niveles_estudios[0]);
 		return this.niveles_estudios;
 	}
+
 	public int getNivelesEstudiosSize() {
 		return NivelEstudios.values().length;
 	}
@@ -78,11 +88,10 @@ public class AddVotoBean {
 	}
 
 	public void update() {
-		// TODO Auto-generated method stub
-
+		this.voto = new Voto(user_ip, nivel_estudios, valoracion, tema);
 	}
 
 	public void process() {
+		this.addVotoController.add(voto);
 	}
-
 }
