@@ -40,6 +40,9 @@ public class Dispatcher extends HttpServlet {
 				break;
 			case "votar":
 				AddVotoBean addVotoBean = new AddVotoBean();
+				String id = request.getParameter("temaid");
+				System.out.println("[id] -> " + id.toString());
+				addVotoBean.setTemaId(Integer.valueOf(id));
 				request.setAttribute(action, addVotoBean);
 				view = action;
 				break;
@@ -76,6 +79,19 @@ public class Dispatcher extends HttpServlet {
 				request.setAttribute("temas", listTemasBean);
 				view = "temas";
 				break;
+			case "votar":
+				AddVotoBean addVotoBean = new AddVotoBean();
+	        	String id = request.getParameter("temaid");
+	        	String val = request.getParameter("valoracion");
+	        	String nivelEstudios = request.getParameter("nivel_estudios");
+	        	addVotoBean.setTemaId(Integer.valueOf(id));
+	        	addVotoBean.setNivelEstudios(NivelEstudios.valueOf(nivelEstudios));
+	        	addVotoBean.setValoracion(Integer.valueOf(val));
+	        	addVotoBean.setUserIp(request.getRemoteAddr());
+	        	addVotoBean.update();
+	        	addVotoBean.process();
+	        	view = "temas";
+	        	break;
 			default:
 				break;
 			}
