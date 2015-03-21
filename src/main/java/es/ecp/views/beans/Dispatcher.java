@@ -74,10 +74,11 @@ public class Dispatcher extends HttpServlet {
 						request.getParameter("name"),
 						request.getParameter("question"));
 				addTemaView.update();
+				
+				view = "temas";
 				ListTemasBean listTemasBean = new ListTemasBean();
 				listTemasBean.update();
 				request.setAttribute("temas", listTemasBean);
-				view = "temas";
 				break;
 			case "votar":
 				AddVotoBean addVotoBean = new AddVotoBean();
@@ -90,7 +91,11 @@ public class Dispatcher extends HttpServlet {
 	        	addVotoBean.setUserIp(request.getRemoteAddr());
 	        	addVotoBean.update();
 	        	addVotoBean.process();
+	        	
 	        	view = "temas";
+	        	ListTemasBean listTemasBean1 = new ListTemasBean();
+				listTemasBean1.update();
+				request.setAttribute(view, listTemasBean1);
 	        	break;
 			default:
 				break;
