@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Votaciones</title>
+<title>Nueva Votación</title>
 </head>
 <body>
 	<h1>Votar</h1>
