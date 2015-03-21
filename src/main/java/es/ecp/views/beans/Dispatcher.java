@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.logging.log4j.LogManager;
-
 import es.ecp.models.utils.NivelEstudios;
 
 @WebServlet("/jsp/*")
@@ -22,7 +20,7 @@ public class Dispatcher extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		String view = "index";
+		String view = "temas";
 
 		if (request.getPathInfo() != null) {
 			String action = request.getPathInfo().substring(1);
@@ -47,11 +45,14 @@ public class Dispatcher extends HttpServlet {
 				view = action;
 				break;
 			default:
+				view = "temas";
+				ListTemasBean listTemasBean1 = new ListTemasBean();
+				listTemasBean1.update();
+				request.setAttribute(view, listTemasBean1);
 				break;
 			}
 		}
 
-		LogManager.getLogger().debug(PATH_ROOT_VIEW + view + ".jsp");
 		this.getServletContext()
 				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
 				.forward(request, response);
@@ -62,7 +63,7 @@ public class Dispatcher extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		String view = "index";
+		String view = "temas";
 
 		if (request.getPathInfo() != null) {
 			String action = request.getPathInfo().substring(1);
@@ -74,7 +75,7 @@ public class Dispatcher extends HttpServlet {
 						request.getParameter("name"),
 						request.getParameter("question"));
 				addTemaView.update();
-				
+
 				view = "temas";
 				ListTemasBean listTemasBean = new ListTemasBean();
 				listTemasBean.update();
@@ -82,22 +83,33 @@ public class Dispatcher extends HttpServlet {
 				break;
 			case "votar":
 				AddVotoBean addVotoBean = new AddVotoBean();
-	        	String id = request.getParameter("temaid");
-	        	String val = request.getParameter("valoracion");
-	        	String nivelEstudios = request.getParameter("nivel_estudios");
-	        	addVotoBean.setTemaId(Integer.valueOf(id));
-	        	addVotoBean.setNivelEstudios(NivelEstudios.valueOf(nivelEstudios));
-	        	addVotoBean.setValoracion(Integer.valueOf(val));
-	        	addVotoBean.setUserIp(request.getRemoteAddr());
-	        	addVotoBean.update();
-	        	addVotoBean.process();
-	        	
-	        	view = "temas";
-	        	ListTemasBean listTemasBean1 = new ListTemasBean();
+				String id = request.getParameter("temaid");
+				String val = request.getParameter("valoracion");
+				String nivelEstudios = request.getParameter("nivel_estudios");
+				addVotoBean.setTemaId(Integer.valueOf(id));
+				addVotoBean.setNivelEstudios(NivelEstudios
+						.valueOf(nivelEstudios));
+				addVotoBean.setValoracion(Integer.valueOf(val));
+				addVotoBean.setUserIp(request.getRemoteAddr());
+				addVotoBean.update();
+				addVotoBean.process();
+
+				view = "temas";
+				ListTemasBean listTemasBean1 = new ListTemasBean();
 				listTemasBean1.update();
 				request.setAttribute(view, listTemasBean1);
-	        	break;
+				break;
+			case "deletetema":
+				DeleteTemaBean deleteTemaBean = new DeleteTemaBean();
+				String temaid = request.getParameter("temaid");
+				deleteTemaBean.setTemaId(Integer.valueOf(temaid));
+				request.setAttribute(action, deleteTemaBean);
+				deleteTemaBean.update();
 			default:
+				view = "temas";
+				ListTemasBean listTemasBean2 = new ListTemasBean();
+				listTemasBean2.update();
+				request.setAttribute(view, listTemasBean2);
 				break;
 			}
 		}
