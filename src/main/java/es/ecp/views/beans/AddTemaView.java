@@ -1,10 +1,12 @@
 package es.ecp.views.beans;
 
+import java.io.Serializable;
+
 import es.ecp.controllers.AddTemaController;
 import es.ecp.models.entities.Tema;
 
-public class AddTemaView extends ViewBean {
-
+public class AddTemaView extends ViewBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private Tema tema;
 
 	public AddTemaView(String name, String question) {
