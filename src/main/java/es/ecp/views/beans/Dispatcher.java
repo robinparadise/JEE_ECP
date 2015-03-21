@@ -39,10 +39,15 @@ public class Dispatcher extends HttpServlet {
 			case "votar":
 				AddVotoBean addVotoBean = new AddVotoBean();
 				String id = request.getParameter("temaid");
-				System.out.println("[id] -> " + id.toString());
 				addVotoBean.setTemaId(Integer.valueOf(id));
 				request.setAttribute(action, addVotoBean);
 				view = action;
+				break;
+			case "showvotos":
+				ShowVotosBean showVotosBean = new ShowVotosBean();
+				String temaid = request.getParameter("temaid");
+				showVotosBean.setTemaId(Integer.valueOf(temaid));
+				request.setAttribute(action, showVotosBean);
 				break;
 			default:
 				view = "temas";
