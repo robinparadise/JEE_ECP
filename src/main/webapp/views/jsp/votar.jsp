@@ -9,9 +9,10 @@
 <title>Votaciones</title>
 </head>
 <body>
+	<h1>Votar</h1>
 	<c:set var="votoView" scope="request" value="${votar}"/>
 	<form action="votar" method="post">
-		<p>${votoView.getTema().toString()}</p>
+		<b>${votoView.getTema().toString()}</b>
 		
 		<input type="hidden" name="temaid" value="${votoView.tema.getId()}"/>
 		<p>Nivel de estudios:
