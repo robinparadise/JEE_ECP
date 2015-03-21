@@ -12,7 +12,14 @@
 		<h1>Temas</h1>
 		<ul>
 			<c:forEach var="tema" items="${temas.getTemas()}">
-				<li>${tema.name} >> ${tema.question} (<a href="votar?temaid=${tema.id}">Votar</a>)</li>
+				<li>${tema.name} >> ${tema.question}
+					<form action="deletetema" method="post" style="display:inline">
+						<input type="hidden" name="temaid" value="${tema.id}" />
+						(<label for="submit-${tema.id}" style="cursor:pointer">Delete</label>)
+						<input id="submit-${tema.id}" type="submit" value="Submit" style="display:none">
+					</form>
+					(<a href="votar?temaid=${tema.id}">Votar</a>)
+				</li>
 			</c:forEach>
 		</ul>
 		<a href="index">Volver</a> |
