@@ -6,12 +6,12 @@ import javax.persistence.Id;
 
 @Entity
 public class Tema {
-	
+
 	public static final String TABLE = "tema";
 	public static final String ID = "id";
 	public static final String NAME = "name";
 	public static final String QUESTION = "question";
-	
+
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -23,13 +23,13 @@ public class Tema {
 		this.name = name;
 	}
 
-    public Tema(){	
-    }
-    
-    public Tema(String name, String question){
-    	this.name = name;
-    	this.question = question;
-    }
+	public Tema() {
+	}
+
+	public Tema(String name, String question) {
+		this.name = name;
+		this.question = question;
+	}
 
 	public Integer getId() {
 		return id;
@@ -46,7 +46,7 @@ public class Tema {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getQuestion() {
 		return question;
 	}
@@ -54,12 +54,12 @@ public class Tema {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "[" + id + "] " + name + " >> " + question;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		assert obj != null;

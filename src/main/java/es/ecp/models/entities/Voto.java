@@ -1,15 +1,15 @@
 package es.ecp.models.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import es.ecp.models.utils.NivelEstudios;
 
@@ -37,9 +37,8 @@ public class Voto {
 	@Column(name = VALORACION, nullable = false)
 	private Integer valoracion;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinColumn(name = TEMA, nullable = false)
-	@CascadeOnDelete
 	private Tema tema;
 
 	public Voto() {
@@ -103,7 +102,8 @@ public class Voto {
 		assert obj != null;
 		Voto other = (Voto) obj;
 		return this.nivel_estudios.equals(other.nivel_estudios)
-				&& this.id.equals(other.id) && this.user_ip.equals(other.user_ip)
+				&& this.id.equals(other.id)
+				&& this.user_ip.equals(other.user_ip)
 				&& this.valoracion.equals(other.valoracion)
 				&& this.tema.equals(other.tema);
 	}
