@@ -23,7 +23,7 @@
 			</select>
 		</p>
 		<p>
-			Puntuación: <input type="number" min="0" max="9" step="1"
+			Puntuación: <input type="number" min="0" max="10" step="1"
 				placeholder="0-9" name="valoracion" />
 		</p>
 		<input type="submit" value="Votar" />

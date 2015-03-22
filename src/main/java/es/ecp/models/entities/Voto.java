@@ -37,7 +37,7 @@ public class Voto {
 	@Column(name = VALORACION, nullable = false)
 	private Integer valoracion;
 
-	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = TEMA, nullable = false)
 	private Tema tema;
 
