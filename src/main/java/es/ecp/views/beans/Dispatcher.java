@@ -44,10 +44,13 @@ public class Dispatcher extends HttpServlet {
 				view = action;
 				break;
 			case "showvotos":
+				System.out.println("showvotos!");
 				ShowVotosBean showVotosBean = new ShowVotosBean();
 				String temaid = request.getParameter("temaid");
 				showVotosBean.setTemaId(Integer.valueOf(temaid));
+				showVotosBean.update();
 				request.setAttribute(action, showVotosBean);
+				view = action;
 				break;
 			default:
 				view = "temas";
