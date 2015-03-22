@@ -14,13 +14,16 @@
 	<h2>
 		${voto.tema.toString()}
 	</h2>
-    <p><b>Nota Media: </b>${voto.media}</p>
+    <p><b>Número de Votos: </b>${voto.numVotos}</p>
     <br/>
-    <b>Según el nivel de Estudios</b>
+    <b>Media según el nivel de Estudios</b>
     <ul>
-		<c:forEach var="estudio" items="${votoView.getNivelesEstudios()}">
-			<li>${estudio}</li>
+		<c:forEach var="nivel" items="${voto.mediaByNivelEstudios.entrySet()}">
+			<li>${nivel.getKey()}: ${nivel.getValue()}</li>
 		</c:forEach>
 	</ul>
+	
+	<br/>
+	<p><a href="index">Volver</a></p>
 </body>
 </html>

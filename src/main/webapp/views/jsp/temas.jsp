@@ -18,6 +18,7 @@
 						(<label for="submit-${tema.id}" style="cursor:pointer">Delete</label>)
 						<input id="submit-${tema.id}" type="submit" value="Submit" style="display:none">
 					</form>
+					(<a href="showvotos?temaid=${tema.id}">Ver votaciones</a>)
 					(<a href="votar?temaid=${tema.id}">Votar</a>)
 				</li>
 			</c:forEach>

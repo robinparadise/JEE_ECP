@@ -28,6 +28,7 @@
 		</p>
 		<input type="submit" value="Votar" />
 	</form>
+	<br/>
 	<a href="index">Volver</a>
 </body>
 </html>
