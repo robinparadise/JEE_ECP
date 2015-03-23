@@ -79,10 +79,10 @@ public class Dispatcher extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			switch (action) {
 			case "newtema":
-				AddTemaView addTemaView = new AddTemaView(
+				AddTemaBean addTemaView = new AddTemaBean(
 						request.getParameter("name"),
 						request.getParameter("question"));
-				addTemaView.update();
+				addTemaView.process();
 
 				view = "temas";
 				ListTemasBean listTemasBean = new ListTemasBean();
