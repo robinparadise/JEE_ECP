@@ -6,31 +6,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.bean.ManagedBean;
+
 import es.ecp.models.daos.VotoDao;
 import es.ecp.models.daos.jpa.DaoJpaFactory;
 import es.ecp.models.entities.Tema;
 import es.ecp.models.entities.Voto;
 import es.ecp.models.utils.NivelEstudios;
 
+@ManagedBean
 public class ShowVotosBean extends ViewBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Tema tema;
+	private Tema tema = null;
 	private List<Voto> votos;
 	private VotoDao votoDao = DaoJpaFactory.getFactory().getVotoDao();
 	private int media = 0;
 	private Map<NivelEstudios, Integer> mediaByNivelEstudios;
 	private int numVotos;
+	private int temaId;
 
-	public void setTemaId(Integer temaid) {
+	public void setTemaId(int temaid) {
 		this.tema = DaoJpaFactory.getFactory().getTemaDao().read(temaid);
+		this.temaId = temaid;
 	}
 
 	private int calcMedia(List<Voto> votos) {
 		int media = 0;
+		int size = votos.size();
 		for (Voto voto : votos) {
 			media = media + voto.getValoracion();
 		}
-		media = media / votos.size();
+		if (size > 0) media = media / votos.size();
 		return media;
 	}
 
@@ -85,9 +91,17 @@ public class ShowVotosBean extends ViewBean implements Serializable {
 	public int getNumVotos() {
 		return this.numVotos;
 	}
+	public int getTemaId() {
+		return this.temaId;
+	}
 	
 	public void update() {
-		votos = votoDao.findByTemaId(tema.getId());
+		if (this.tema == null) {
+			this.tema = DaoJpaFactory.getFactory().getTemaDao().read(this.temaId);
+		}
+		System.out.println("ZZZ");
+		System.out.println(this.tema.toString());
+		votos = votoDao.findByTemaId(this.temaId);
 		this.numVotos = votos.size();
 		this.media = calcMedia(votos);
 		Map<NivelEstudios, List<Voto>> votosByHash = VotosByHash(votos);

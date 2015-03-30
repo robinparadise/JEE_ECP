@@ -2,9 +2,12 @@ package es.ecp.views.beans;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+
 import es.ecp.models.daos.jpa.DaoJpaFactory;
 import es.ecp.models.entities.Tema;
 
+@ManagedBean
 public class DeleteTemaBean extends ViewBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Tema tema;
