@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14279681629070" configfile="/JEE_ECP_MASTER/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="views/jsf/home.xhtml" id="pf14280638409898" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" outlinks="pf14280638409899" inlinks="pf14280638409899" path="/views/jsf/home.xhtml"/>
-  <links id="pf14280638409899" target="pf14280638409898" source="pf14280638409898" outcome="home" redirect="true"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" name="Index" id="pf14279681629070" configfile="/JEE_ECP_MASTER/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Index.html" x="72" y="60" id="pf142807579640810" path="/Index.html"/>
 </pageflow:Pageflow>

@@ -112,7 +112,7 @@ public class Dispatcher extends HttpServlet {
 				String temaid = request.getParameter("temaid");
 				deleteTemaBean.setTemaId(Integer.valueOf(temaid));
 				request.setAttribute(action, deleteTemaBean);
-				deleteTemaBean.update();
+				deleteTemaBean.process();
 			default:
 				view = "temas";
 				ListTemasBean listTemasBean2 = new ListTemasBean();

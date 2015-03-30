@@ -91,7 +91,8 @@ public class AddVotoBean extends ViewBean implements Serializable {
 		this.voto = new Voto(user_ip, nivel_estudios, valoracion, tema);
 	}
 
-	public void process() {
+	public String process() {
 		this.addVotoController.add(voto);
+		return "temas";
 	}
 }
