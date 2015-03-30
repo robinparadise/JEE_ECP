@@ -15,18 +15,17 @@
 	<ul>
 		<ui:repeat var="tema" value="#{listTemasBean.temas}">
 			<li>"#{tema.toString()}"
-				<h:form id="deleteTema" style="display:inline">
-					<input type="hidden" name="temaid" value="#{tema.id}" />
-				(<label for="submit-#{tema.id}" style="cursor:pointer">Delete</label>)
-				<h:commandButton value="Delete" id="submit-#{tema.id}" type="submit"
-						action="#{deleteTemaBean.process}" style="display:none"/>
+				<h:form style="display:inline">
+					<h:inputHidden value="#{tema.id}"/>
+					<h:outputLabel for="submit" value="(Delete)" style="cursor:pointer"/>
+					<h:inputHidden value="submit" action="#{deleteTemaBean.process()}"/>
 				</h:form>
 				(<a href="showvotos.jsf?temaid=#{tema.id}">Ver votaciones</a>)
 				(<a href="votar.jsf?temaid=#{tema.id}">Votar</a>)
 			</li>
 		</ui:repeat>
 	</ul>
-	<br />
-	<a href="/JEE_ECP/">Volver</a>
+	<br/>
+	<a href="/JEE_ECP/views/">Volver</a> | <a href="addTema.jsf"> + Nuevo Tema</a>
 </h:body>
 </html>

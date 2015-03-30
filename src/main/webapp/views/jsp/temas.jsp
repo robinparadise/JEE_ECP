@@ -23,7 +23,7 @@
 				</li>
 			</c:forEach>
 		</ul>
-		<a href="index">Volver</a> |
+		<a href="/JEE_ECP/views/">Volver</a> |
 		<a href="newtema"> + Añadir nuevo Tema</a>
 	</body>
 	
