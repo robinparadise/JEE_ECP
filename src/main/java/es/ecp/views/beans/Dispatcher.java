@@ -60,6 +60,11 @@ public class Dispatcher extends HttpServlet {
 				break;
 			}
 		}
+		else {
+			ListTemasBean listTemasBean1 = new ListTemasBean();
+			listTemasBean1.update();
+			request.setAttribute(view, listTemasBean1);
+		}
 
 		this.getServletContext()
 				.getRequestDispatcher(PATH_ROOT_VIEW + view + ".jsp")
