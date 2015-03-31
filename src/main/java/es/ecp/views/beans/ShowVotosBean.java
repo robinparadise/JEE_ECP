@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 
@@ -24,6 +26,7 @@ public class ShowVotosBean extends ViewBean implements Serializable {
 	private Map<NivelEstudios, Integer> mediaByNivelEstudios;
 	private int numVotos;
 	private int temaId;
+	private Set<Entry<NivelEstudios, Integer>> entrySet;
 
 	public void setTemaId(int temaid) {
 		this.tema = DaoJpaFactory.getFactory().getTemaDao().read(temaid);
@@ -77,6 +80,7 @@ public class ShowVotosBean extends ViewBean implements Serializable {
 		return this.media;
 	}
 	public Map<NivelEstudios, Integer> getMediaByNivelEstudios() {
+		System.out.println("getMediaByNivelEstudios");
 		return this.mediaByNivelEstudios;
 	}
 	public int getMediaByNivelEstudios(NivelEstudios nivel) {
@@ -95,20 +99,29 @@ public class ShowVotosBean extends ViewBean implements Serializable {
 		return this.temaId;
 	}
 	
+	
 	public void update() {
 		if (this.tema == null) {
 			this.tema = DaoJpaFactory.getFactory().getTemaDao().read(this.temaId);
 		}
-		System.out.println("ZZZ");
-		System.out.println(this.tema.toString());
 		votos = votoDao.findByTemaId(this.temaId);
 		this.numVotos = votos.size();
 		this.media = calcMedia(votos);
 		Map<NivelEstudios, List<Voto>> votosByHash = VotosByHash(votos);
 		this.mediaByNivelEstudios = calcMediaByNivelEstudios(votosByHash);
+		setEntrySet(this.mediaByNivelEstudios.entrySet());
+		System.out.println("update");
 	}
 
 	public void process() {
+	}
+
+	public Set<Entry<NivelEstudios, Integer>> getEntrySet() {
+		return entrySet;
+	}
+
+	public void setEntrySet(Set<Entry<NivelEstudios, Integer>> entrySet) {
+		this.entrySet = entrySet;
 	}
 
 }

@@ -15,17 +15,18 @@
         <f:viewParam name="temaid" value="#{showVotosBean.temaId}" />
     </f:metadata>
 	<h2>
-		${showVotosBean.tema.toString()}
+		#{showVotosBean.tema.toString()}
+		#{showVotosBean.update()}
 	</h2>
 	<p><b>Número de Votos: </b>#{showVotosBean.numVotos}</p>
     <br/>
     <b>Media según el nivel de Estudios:</b>
     <ul>
-		<c:forEach var="nivel" items="#{showVotosBean.mediaByNivelEstudios.entrySet()}">
-			<li>${nivel.getKey()}: ${nivel.getValue()}</li>
-		</c:forEach>
+		<ui:repeat var="nivel" value="#{showVotosBean.entrySet.toArray()}">
+			<li>#{nivel.key}: #{nivel.value}</li>
+		</ui:repeat>
 	</ul>
 	<br/>
-	<a href="/JEE_ECP/views/">Volver</a>
+	<a href="temas.xhtml">Volver</a>
 </h:body>
 </html>
