@@ -2,12 +2,17 @@ package es.ecp.views.beans;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
 import es.ecp.controllers.AddVotoController;
 import es.ecp.models.daos.jpa.DaoJpaFactory;
 import es.ecp.models.entities.Tema;
 import es.ecp.models.entities.Voto;
 import es.ecp.models.utils.NivelEstudios;
 
+@ManagedBean
 public class AddVotoBean extends ViewBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,6 +24,7 @@ public class AddVotoBean extends ViewBean implements Serializable {
 	private Integer valoracion;
 	private Tema tema;
 	private Voto voto;
+	private int temaId;
 
 	private static String[] names() {
 		NivelEstudios[] nivelEstudios = NivelEstudios.values();
@@ -34,8 +40,6 @@ public class AddVotoBean extends ViewBean implements Serializable {
 	public String[] niveles_estudios = names();
 
 	public String[] getNivelesEstudios() {
-		System.out.println(">>");
-		System.out.println(this.niveles_estudios[0]);
 		return this.niveles_estudios;
 	}
 
@@ -52,6 +56,13 @@ public class AddVotoBean extends ViewBean implements Serializable {
 	}
 
 	public String getUserIp() {
+		if(this.user_ip == null){
+			HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+			this.user_ip = req.getHeader("X-FORWARDED-FOR");
+			if( this.user_ip == null ) {
+			    this.user_ip = req.getRemoteAddr();
+			}
+		}
 		return this.user_ip;
 	}
 
@@ -88,11 +99,25 @@ public class AddVotoBean extends ViewBean implements Serializable {
 	}
 
 	public void update() {
-		this.voto = new Voto(user_ip, nivel_estudios, valoracion, tema);
+		if (this.tema == null) {
+			this.tema = DaoJpaFactory.getFactory().getTemaDao().read(this.temaId);
+		}
+		this.voto = new Voto(getUserIp(), nivel_estudios, valoracion, tema);
 	}
 
 	public String process() {
+		if (this.voto == null) {
+			this.update();
+		}
 		this.addVotoController.add(voto);
 		return "temas";
+	}
+
+	public int getTemaId() {
+		return temaId;
+	}
+
+	public void setTemaId(int temaId) {
+		this.temaId = temaId;
 	}
 }
