@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"        
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>JSF Temas</title>
+</h:head>
+<h:body>
+	<h1>Votar</h1>
+	<f:metadata>
+		<f:viewParam name="temaid" value="#{addVotoBean.temaId}" />
+	</f:metadata>
+	#{addVotoBean.setTemaId(addVotoBean.temaId)}
+	<h2>#{addVotoBean.tema.toString()}</h2>
+	
+	<h:form id="f1">
+		<p>
+			Nivel de Estudios:
+			<h:selectOneListbox id="nivel" value="#{addVotoBean.nivelEstudios}" size="1">
+				<f:selectItems value="#{addVotoBean.nivelesEstudios}" />
+			</h:selectOneListbox>
+		</p>
+		<p>
+			Puntuación:
+			<h:inputText value="#{addVotoBean.valoracion}" placeholder="0-10" type="number" min="0" max="10" step="1"/>
+		</p>
+		<h:commandButton value="Votar" id="submit" type="submit"
+			action="#{addVotoBean.process}" />
+	</h:form>
+	<br />
+	<a href="temas.xhtml">Volver</a>
+</h:body>
+</html>

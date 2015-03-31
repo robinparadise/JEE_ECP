@@ -24,7 +24,7 @@
 		</p>
 		<p>
 			Puntuación: <input type="number" min="0" max="10" step="1"
-				placeholder="0-9" name="valoracion" />
+				placeholder="0-10" name="valoracion" />
 		</p>
 		<input type="submit" value="Votar" />
 	</form>
